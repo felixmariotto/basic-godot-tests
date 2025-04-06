@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://byiwknbm63m1c"]
+
+[ext_resource type="Script" uid="uid://c8mbr6gy1iv5t" path="res://game.gd" id="1_80nbo"]
+[ext_resource type="PackedScene" uid="uid://beogfjf0opvty" path="res://game_content.tscn" id="2_e2o6t"]
+[ext_resource type="Script" uid="uid://dvjyv8vank7wj" path="res://camera_2d.gd" id="3_feb5d"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_80nbo")
+
+[node name="CommonViewport" type="SubViewport" parent="."]
+
+[node name="GameContent" parent="CommonViewport" instance=ExtResource("2_e2o6t")]
+
+[node name="SubViewportContainer1" type="SubViewportContainer" parent="."]
+offset_left = 104.0
+offset_top = 160.0
+offset_right = 304.0
+offset_bottom = 360.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer1"]
+handle_input_locally = false
+size = Vector2i(200, 200)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="SubViewportContainer1/SubViewport"]
+script = ExtResource("3_feb5d")
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="."]
+offset_left = 608.0
+offset_top = 560.0
+offset_right = 808.0
+offset_bottom = 760.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer2"]
+handle_input_locally = false
+size = Vector2i(200, 200)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="SubViewportContainer2/SubViewport"]
+script = ExtResource("3_feb5d")
+radial_offset = 2.19
