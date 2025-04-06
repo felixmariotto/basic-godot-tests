@@ -1,0 +1,28 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="2D physics test"
+run/main_scene="uid://dit27pniykrrk"
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1000
+window/size/viewport_height=1000
+
+[layer_names]
+
+2d_physics/layer_1="walls"
+2d_physics/layer_2="moving items"
+2d_physics/layer_3="obstacles"
+2d_physics/layer_4="player"

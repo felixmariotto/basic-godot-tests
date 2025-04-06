@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dit27pniykrrk"]
+
+[ext_resource type="PackedScene" uid="uid://qoy0tuyf2r4r" path="res://player.tscn" id="1_80nbo"]
+
+[node name="Game" type="Node2D"]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_80nbo")]
+position = Vector2(467, 566)
+scale = Vector2(0.765, 0.765)
+speed = 450.0
