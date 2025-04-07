@@ -19,5 +19,6 @@ func _physics_process(delta: float) -> void:
 	direction = direction.normalized()
 	
 	var collision_info = move_and_collide( direction * delta * speed )
+	
 	if collision_info:
-		print( collision_info )
+		move_and_collide( collision_info.get_remainder().slide( collision_info.get_normal() ) )
