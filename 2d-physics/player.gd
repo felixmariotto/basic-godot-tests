@@ -22,3 +22,6 @@ func _physics_process(delta: float) -> void:
 	
 	if collision_info:
 		move_and_collide( collision_info.get_remainder().slide( collision_info.get_normal() ) )
+		var collider = collision_info.get_collider()
+		# here we should apply an impulse on the collider object
+		print( collider )
