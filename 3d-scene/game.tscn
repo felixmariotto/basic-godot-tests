@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://6iyn7d8iadfr"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_mwb40"]
+lightmap_size_hint = Vector2i(17, 9)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mwb40"]
+
+[node name="Game" type="Node3D"]
+
+[node name="Sphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.999996, 0.00176927, -0.0020477, -0.00176684, 0.999998, 0.00117634, 0.0020498, -0.00117269, 0.999997, 0, 1.10157, 0)
+mesh = SubResource("SphereMesh_mwb40")
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.44088, 0, 0, 0, 1, 0, 0, 0, 4.79648, 0, 0, 0)
+mesh = SubResource("PlaneMesh_mwb40")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.854078, 0.520145, 0, -0.520145, 0.854078, 2.38419e-07, 2.52602, 3.0876)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.893699, -0.19167, -0.405665, 0.441833, 0.533175, 0.721462, 0.0780076, -0.824007, 0.561184, -2.22276, 4.28539, 1.99683)
+shadow_enabled = true
+shadow_bias = 0.15
+shadow_normal_bias = 10.0
+shadow_transmittance_bias = 1.564
+shadow_blur = 0.1
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11961, 2.68311, 1.30679)
+visible = false
+shadow_enabled = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.63096, 0, -0.775815, 0.441411, 0.822363, 0.358994, 0.638002, -0.568964, 0.518878, -3.00591, 3.61093, 2.16661)
+visible = false
+shadow_enabled = true
+shadow_bias = 0.1
+spot_range = 13.865
+spot_angle = 36.97
