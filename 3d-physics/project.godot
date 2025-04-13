@@ -10,19 +10,18 @@ config_version=5
 
 [application]
 
-config/name="demo: 2D physics"
-run/main_scene="uid://dit27pniykrrk"
+config/name="demo: 3D physics"
+run/main_scene="uid://bn8xqa02itjwm"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=1000
-window/size/viewport_height=1000
+window/size/viewport_width=2000
+window/size/viewport_height=1500
 
 [layer_names]
 
-2d_physics/layer_1="walls"
-2d_physics/layer_2="moving items"
-2d_physics/layer_3="obstacles"
-2d_physics/layer_4="player"
+3d_physics/layer_1="player"
+3d_physics/layer_2="static"
+3d_physics/layer_3="balls"

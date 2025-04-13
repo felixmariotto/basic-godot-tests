@@ -26,4 +26,4 @@ func _physics_process(delta: float) -> void:
 		var collider = collision_info.get_collider()
 		# here we should apply an impulse on the collider object
 		if collider is RigidBody2D:
-			collider.apply_impulse( collision_info.get_collider_velocity() * -0.1, collision_info.get_position() - collider.position )
+			collider.apply_impulse( collision_info.get_collider_velocity() * -0.2, collision_info.get_position() - collider.position )
