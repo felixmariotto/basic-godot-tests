@@ -2,6 +2,7 @@ extends Node2D
 
 var config := ConfigFile.new()
 var config_path = "user://game_config.cfg"
+var scene_data_path = "user://scene_state.dat"
 
 var timer = 0.0
 var interval = 1.0 # seconds
@@ -10,7 +11,7 @@ var Sprite = preload("res://sprite.tscn")
 
 func _ready() -> void:
 	
-	# load the config file, and if it doesn't exist, create it with initial values.
+	# load the config file, and if it doesn't exist, create it with initial value.
 	
 	var err = config.load( config_path )
 	
@@ -18,7 +19,10 @@ func _ready() -> void:
 		
 		config.set_value( "time", "total_play_time", timer )
 
+
 func _process(delta: float) -> void:
+	
+	# increment the timer, and compute the total play time, including the recorded time from previous sessions
 	
 	timer += delta
 	
@@ -26,7 +30,11 @@ func _process(delta: float) -> void:
 	
 	var total_play_time = previous_time + timer
 	
+	# disaplay the time in a label in the scene
+	
 	$Timer.text = "Game time: " + String.num( total_play_time, 1 ) + "s"
+	
+	# every second, record the total play time and the current state of the scene
 	
 	if timer >= interval:
 		
@@ -35,8 +43,13 @@ func _process(delta: float) -> void:
 		config.set_value( "time", "total_play_time", total_play_time )
 		
 		config.save( config_path )
+		
+		record_scene_state()
+
 
 func _unhandled_input(event: InputEvent) -> void:
+	
+	# call function when the player clicks in the viewport with their mouse
 	
 	if event is InputEventMouseButton and event.pressed :
 		
@@ -48,6 +61,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			
 			remove_sprite( event.position )
 
+
+# add a sprite in the 2D scene at the passed viewport position
 func add_sprite( position: Vector2 ):
 	
 	var sprite = Sprite.instantiate()
@@ -56,6 +71,8 @@ func add_sprite( position: Vector2 ):
 	
 	add_child( sprite )
 
+
+# remove every sprite located on the past viewport position
 func remove_sprite( position: Vector2 ):
 	
 	for child in get_children():
@@ -67,3 +84,17 @@ func remove_sprite( position: Vector2 ):
 			if child.get_rect().has_point( local_point ):
 				
 				child.queue_free()
+
+
+# record the sprites in a save file
+func record_scene_state():
+	
+	var file = FileAccess.open( scene_data_path, FileAccess.WRITE )
+	
+	print( file )
+	
+	for child in get_children():
+		
+		if child is Sprite2D:
+			
+			print( child )
