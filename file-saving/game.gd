@@ -1,5 +1,41 @@
 extends Node2D
 
+var config := ConfigFile.new()
+var config_path = "user://game_config.cfg"
+
+var timer = 0.0
+var interval = 1.0 # seconds
+
+var Sprite = preload("res://sprite.tscn")
+
+func _ready() -> void:
+	
+	# load the config file, and if it doesn't exist, create it with initial values.
+	
+	var err = config.load( config_path )
+	
+	if err != OK:
+		
+		config.set_value( "time", "total_play_time", timer )
+
+func _process(delta: float) -> void:
+	
+	timer += delta
+	
+	var previous_time = config.get_value( "time", "total_play_time" )
+	
+	var total_play_time = previous_time + timer
+	
+	$Timer.text = "Game time: " + String.num( total_play_time, 1 ) + "s"
+	
+	if timer >= interval:
+		
+		timer = 0.0
+		
+		config.set_value( "time", "total_play_time", total_play_time )
+		
+		config.save( config_path )
+
 func _unhandled_input(event: InputEvent) -> void:
 	
 	if event is InputEventMouseButton and event.pressed :
@@ -12,12 +48,22 @@ func _unhandled_input(event: InputEvent) -> void:
 			
 			remove_sprite( event.position )
 
-#
-
 func add_sprite( position: Vector2 ):
 	
-	print( 'add sprite at ', position )
+	var sprite = Sprite.instantiate()
+	
+	sprite.position = position
+	
+	add_child( sprite )
 
 func remove_sprite( position: Vector2 ):
 	
-	print( 'remove sprites at ', position )
+	for child in get_children():
+		
+		if child is Sprite2D:
+		
+			var local_point = child.to_local( position )
+			
+			if child.get_rect().has_point( local_point ):
+				
+				child.queue_free()
