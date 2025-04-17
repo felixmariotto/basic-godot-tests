@@ -18,6 +18,18 @@ func _ready() -> void:
 	if err != OK:
 		
 		config.set_value( "time", "total_play_time", timer )
+	
+	# load the scene state file and add sprites to the recorded positions
+	
+	var file = FileAccess.open( scene_data_path, FileAccess.READ )
+	
+	if file:
+		
+		var sprite_positions = file.get_var()
+		
+		for sprite_position in sprite_positions:
+			
+			add_sprite( sprite_position )
 
 
 func _process(delta: float) -> void:
@@ -91,10 +103,14 @@ func record_scene_state():
 	
 	var file = FileAccess.open( scene_data_path, FileAccess.WRITE )
 	
-	print( file )
+	var positions = []
 	
 	for child in get_children():
 		
 		if child is Sprite2D:
 			
-			print( child )
+			positions.append( child.position )
+	
+	file.store_var( positions )
+	
+	file.close()

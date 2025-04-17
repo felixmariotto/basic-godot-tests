@@ -12,12 +12,13 @@ offset_right = 1165.0
 offset_bottom = 137.0
 theme_override_font_sizes/font_size = 30
 text = "Left click: add a sprite.
-Right click: remove a sprite."
+Right click: remove a sprite.
+The game records sprite positions across sessions."
 
 [node name="Timer" type="Label" parent="."]
 offset_left = 37.0
-offset_top = 132.0
+offset_top = 211.0
 offset_right = 1165.0
-offset_bottom = 229.0
+offset_bottom = 308.0
 theme_override_font_sizes/font_size = 30
 text = "Game time: 0.0s"
